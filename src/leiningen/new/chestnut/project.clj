@@ -25,14 +25,19 @@
 
   :uberjar-name "{{name}}.jar"
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
+ :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
                              :compiler {:output-to     "resources/public/js/app.js"
                                         :output-dir    "resources/public/js/out"
                                         :source-map    "resources/public/js/out.js.map"
                                         :preamble      ["react/react.min.js"]
                                         :externs       ["react/externs/react.js"]
                                         :optimizations :none
-                                        :pretty-print  true}}}}
+                                        :pretty-print  true}}
+                       :release {:source-paths ["src/cljs"]
+                              :compiler {:output-to     "target/app.js"
+                                         :preamble      ["react/react.min.js"]
+                                         :externs       ["react/externs/react.js"]
+                                         :optimizations :advanced}}}}
 
   :profiles {:dev {:repl-options {:init-ns {{name}}.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
